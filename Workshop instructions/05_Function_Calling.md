@@ -16,16 +16,22 @@ Working with functions can be broken down into three high-level steps:
 - Call the chat completions API again, including the response from your function to get a final response
 
 
-### Updating Prompt to provide context
+### Updating Prompt Instructions to provide context
 
-First update the Prompt. 
-- In this Prompt explain the goal of the assistant
+First update the Prompt Instructions. 
+- In this Prompt Instructions explain the goal of the assistant
 - Explain the information that needs to be gathered
 - Which function to all if all information is gathered
 
-```text title="Prompt"
+```text title="Prompt Instructions"
 You are an AI assistant that helps people find hotels. 
 In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
+ 
+Below is a list of hotels you can reference from:
+You are an AI assistant that helps people find hotels. 
+In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
+
+Once you have retrieved the information use get_hotels to get the hotel name and return the name to the user.
  
 Below is a list of hotels you can reference from:
 [
@@ -36,58 +42,16 @@ Below is a list of hotels you can reference from:
         "features": "free wifi, breakfast included, pet friendly"
     },
     {
-        "name": "Hotel Artemide",
-        "location": "Rome, Italy",
-        "price": 200,
-        "features": "city center, free wifi, airport shuttle"
-    },
-    {
-        "name": "Hotel Adlon Kempinski",
-        "location": "Berlin, Germany",
-        "price": 180,
-        "features": "free parking, gym, pet friendly"
-    },
-    {
         "name": "W Barcelona",
         "location": "Barcelona, Spain",
         "price": 220,
         "features": "beachfront, free wifi, pool"
     },
-    {
+    {hotel
         "name": "Hotel Pulitzer",
         "location": "Amsterdam, Netherlands",
         "price": 210,
         "features": "canal view, free wifi, breakfast included"
-    },
-    {
-        "name": "Hotel Sacher",
-        "location": "Vienna, Austria",
-        "price": 190,
-        "features": "city center, free wifi, spa"
-    },
-    {
-        "name": "Hotel Kings Court",
-        "location": "Prague, Czech Republic",
-        "price": 170,
-        "features": "historic district, free wifi, breakfast included"
-    },
-    {
-        "name": "Bairro Alto Hotel",
-        "location": "Lisbon, Portugal",
-        "price": 160,
-        "features": "free wifi, rooftop bar, pet friendly"
-    },
-    {
-        "name": "Electra Palace Athens",
-        "location": "Athens, Greece",
-        "price": 230,
-        "features": "acropolis view, free wifi, breakfast included"
-    },
-    {
-        "name": "Corinthia Hotel Budapest",
-        "location": "Budapest, Hungary",
-        "price": 150,
-        "features": "thermal baths, free wifi, city center"
     }
 ]
 ```
@@ -139,11 +103,62 @@ The agent should start asking you about location, price and hotel features and f
 
 ### Parallel function calling with multiple functions
 
+We can create a parallel function to find local attractions in the area. 
 
-:::info[Assignment]
-Extend the function to ask for how many people the room is.
-:::
+First update the prompt instructions with local attractions in the Netherlands:
 
+```
+Once you have retrieved the information use tourist activities to get a list of activities a person can engage in once in the select country.
+ 
+#Tourist Activities
+Zaanse Schans:
+Located around 15 kilometers north of Amsterdam, Zaanse Schans is an open-air museum resembling a traditional Dutch village. Visitors can stroll among green wooden houses, a shipyard, and even witness live demonstrations at iconic windmills. Only five windmills remain, but they offer a glimpse into the past.
+Recommended tour: Zaanse Schans Windmills Half-Day Tour
 
+Keukenhof
+Keukenhof
+Keukenhof (Garden of Europe):
+Bursting with colorful blooms, Keukenhof is a must-visit for flower enthusiasts. Known as the Garden of Europe, it showcases tulips, daffodils, and other floral varieties. The vibrant displays stretch as far as the eye can see.
+Explore this riot of color during springtime!
+Amsterdam Canals:
+Similar to Venice, Amsterdam boasts a picturesque canal system. Take a boat tour or stroll along the banks to appreciate the idyllic waterways.
+Book a cruise: Amsterdam Evening Canal Cruise
+
+```
+
+Create a new function referencing the local tourist attractions in the location:
+
+```json title="Tools"
+{
+  "name": "tourist_activities",
+  "description": "Determine activities a tourist can take part in",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "location": {
+        "type": "string",
+        "description": "The tourist location"
+      }
+    },
+    "required": [
+      "location"
+    ]
+  }
+}
+```
+
+## Bringing it all together
+
+For our Contoso Outdoor Company, we can create a function to search through the database and return a specific product based on the user needs. 
+
+First we will need to update the system instructions:
+
+```
+```
+
+Then we can create a function to search through the products available on Contoso catalog and return a product similiar to the user requirements.
+
+```
+```
 
 Congratulations! You have now completed the 4th part of the lab and you learnt how to interact with llms using Function Calling. Click next to wrap up the lab.
