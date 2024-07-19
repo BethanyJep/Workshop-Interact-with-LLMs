@@ -107,15 +107,15 @@ The agent should start asking you about location, price and hotel features and f
 
 ## Best Practices for Function Calling
 
-- Define Clear Function Parameters: Ensure that each function has a clear and concise description, along with well-defined parameters. This helps the model understand when and how to call the function, reducing ambiguity and improving the acuracy of the model's responses.
+- Define **Clear Function Parameters:** Ensure that each function has a clear and concise description, along with well-defined parameters. This helps the model understand when and how to call the function, reducing ambiguity and improving the acuracy of the model's responses.
 
-- Error Handling: Include robust error handling in your functions to manage unexpected inputs or failures gracefully.
+- **Error Handling:** Include robust error handling in your functions to manage unexpected inputs or failures gracefully.
 
-- Security Considerations: Be mindful of security implications, especially when dealing with sensitive data or actions. Ensure that your functions are secure and do not expose vulnerabilities.
+- **Security Considerations:** Be mindful of security implications, especially when dealing with sensitive data or actions. Ensure that your functions are secure and do not expose vulnerabilities.
 
-- Iterative Testing: Continuously test and refine your functions to ensure they work correctly with the model. This helps identify and fix issues early.
+- **Iterative Testing:** Continuously test and refine your functions to ensure they work correctly with the model. This helps identify and fix issues early.
 
-- Parallel Function Calls: When using parallel function calls, ensure that the functions are independent and do not interfere with each other.
+- **Parallel Function Calls:** When using parallel function calls, ensure that the functions are independent and do not interfere with each other.
 
 ### Parallel function calling with multiple functions
 
