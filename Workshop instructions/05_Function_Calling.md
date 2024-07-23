@@ -33,30 +33,6 @@ In the conversation with the user, your goal is to retrieve the required fields 
 Below is a list of hotels you can reference from:
 You are an AI assistant that helps people find hotels. 
 In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
-
-Once you have retrieved the information use get_hotels to get the hotel name and return the name to the user.
- 
-Below is a list of hotels you can reference from:
-[
-    {
-        "name": "Hotel Le Meurice",
-        "location": "Paris, France",
-        "price": 250,
-        "features": "free wifi, breakfast included, pet friendly"
-    },
-    {
-        "name": "W Barcelona",
-        "location": "Barcelona, Spain",
-        "price": 220,
-        "features": "beachfront, free wifi, pool"
-    },
-    {hotel
-        "name": "Hotel Pulitzer",
-        "location": "Amsterdam, Netherlands",
-        "price": 210,
-        "features": "canal view, free wifi, breakfast included"
-    }
-]
 ```
 
 ### Add your Function to your Tools
@@ -124,21 +100,7 @@ We can create a parallel function to find local attractions in the area.
 First update the prompt instructions with local attractions in the Netherlands:
 
 ```
-Once you have retrieved the information use tourist activities to get a list of activities a person can engage in once in the select country.
- 
-#Tourist Activities
-Zaanse Schans:
-Located around 15 kilometers north of Amsterdam, Zaanse Schans is an open-air museum resembling a traditional Dutch village. Visitors can stroll among green wooden houses, a shipyard, and even witness live demonstrations at iconic windmills. Only five windmills remain, but they offer a glimpse into the past.
-Recommended tour: Zaanse Schans Windmills Half-Day Tour
-
-Keukenhof
-Keukenhof
-Keukenhof (Garden of Europe):
-Bursting with colorful blooms, Keukenhof is a must-visit for flower enthusiasts. Known as the Garden of Europe, it showcases tulips, daffodils, and other floral varieties. The vibrant displays stretch as far as the eye can see.
-Explore this riot of color during springtime!
-Amsterdam Canals:
-Similar to Venice, Amsterdam boasts a picturesque canal system. Take a boat tour or stroll along the banks to appreciate the idyllic waterways.
-Book a cruise: Amsterdam Evening Canal Cruise
+Once you have retrieved the information use tourist_activities to get a list of activities a person can engage in once in the select country.
 
 ```
 
