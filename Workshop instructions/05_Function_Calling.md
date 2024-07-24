@@ -15,10 +15,10 @@ Working with functions can be broken down into three high-level steps:
 - Use the model’s response to call your API or function
 - Call the chat completions API again, including the response from your function to get a final response
 
-
 ### Updating Prompt Instructions to provide context
 
-First update the Prompt Instructions. 
+First update the Prompt Instructions.
+
 - In this Prompt Instructions explain the goal of the assistant
 - Explain the information that needs to be gathered
 - Which function to all if all information is gathered
@@ -39,9 +39,9 @@ In the conversation with the user, your goal is to retrieve the required fields 
 
 A function has three main parameters: name, description, and parameters.
 
-* Name:a name for your function
-* Description: The model is to determine when and how to call the function so it's important to give a meaningful description of what the function does.
-* Parameters: is a JSON schema object that describes the parameters that the function accepts.
+- Name:a name for your function
+- Description: The model is to determine when and how to call the function so it's important to give a meaningful description of what the function does.
+- Parameters: is a JSON schema object that describes the parameters that the function accepts.
 
 Below is an example of a sample function:
 
@@ -75,11 +75,12 @@ Below is an example of a sample function:
 Now let's start a conversation with the agent.
 
 Ask:
+
 ```text title="User Message"
 I'm looking for a hotel in the Netherlands
 ```
 
-The agent should start asking you about location, price and hotel features and finally call the function and return the properties in JSON format. 
+The agent should start asking you about location, price and hotel features and finally call the function and return the properties in JSON format.
 
 ## Best Practices for Function Calling
 
@@ -95,7 +96,7 @@ The agent should start asking you about location, price and hotel features and f
 
 ### Parallel function calling with multiple functions
 
-We can create a parallel function to find local attractions in the area. 
+We can create a parallel function to find local attractions in the area.
 
 First update the prompt instructions with local attractions in the Netherlands:
 
@@ -112,97 +113,31 @@ Create a new function referencing the local tourist attractions in the location:
   "description": "Determine activities a tourist can take part in",
   "parameters": {
     "type": "object",
-    "properties": {
       "location": {
         "type": "string",
-        "description": "The tourist location"
+        "description": "location the tourist will be in e.g. Amsterdam, Berlin."
+      },
+      "activity": {
+        "type": "string",
+        "description": "activity the tourist would want to engage in e.g. going to the beach, visiting historical sites etc."
       }
     },
     "required": [
-      "location"
+      "location, activity"
     ]
-  }
 }
 ```
 
 ## Bringing it all together
 
-For the Contoso Outdoor Company, we can create a function to search through the database and return a specific product based on the user query. 
+For the Contoso Outdoor Company, we can create a function to search through the database and return a specific product based on the user query.
 
 First we will need to update the system instructions with a description and sample catalog for the different products:
 
 ```
 You are an AI assistant that helps people find products based on their searches on the contoso database.
 
-In the conversation with the user, your goal is to retrieve the required fields for the function get_products and respond with the most appropriate product based on the user needs.
-
-## Documents​
-The following documentation should be used in the response. The response should specifically include the product id.
-
-{
-  "catalog": {
-    "Tents": [
-      {
-        "id": "1",
-        "title": "TrailMaster X4 Tent",
-        "description": "Crafted from durable polyester, this tent boasts a spacious interior perfect for four occupants. It ensures your dryness under drizzly skies thanks to its water-resistant construction, and the accompanying rainfly adds an extra layer of weather protection.",
-        "url": "/products/trailmaster-x4-tent"
-      },
-      {
-        "id": "8",
-        "title": "Alpine Explorer Tent",
-        "description": "This robust, 8-person, 3-season marvel is from the responsible hands of the AlpineGear brand. Promising an enviable setup that is as straightforward as counting sheep, your camping experience is transformed into a breezy pastime.",
-        "url": "/products/alpine-explorer-tent"
-      },
-      {
-        "id": "3",
-        "title": "SkyView 2-Person Tent",
-        "description": "This tent offers a spacious interior that houses two people comfortably, with room to spare. Crafted from durable waterproof materials to shield you from the elements, it is the fortress you need in the wild.",
-        "url": "/products/skyview-2-person-tent"
-      }
-    ],
-    "Backpacks": [
-      {
-        "id": "2",
-        "title": "Adventurer Pro Backpack",
-        "description": "Uniquely designed with ergonomic comfort in mind, this backpack ensures a steadfast journey no matter the mileage. It boasts a generous 40L capacity wrapped up in durable nylon fabric ensuring its long-lasting performance on even the most rugged pursuits.",
-        "url": "/products/adventurer-pro-backpack"
-      },
-      {
-        "id": "9",
-        "title": "SummitClimber Backpack",
-        "description": "Your reliable partner for every exhilarating journey. With a generous 60-liter capacity and multiple compartments and pockets, packing is a breeze. Every feature points to comfort and convenience; the ergonomic design and adjustable hip belt ensure a pleasantly personalized fit, while padded shoulder straps protect you from the burden of carrying.",
-        "url": "/products/summitclimber-backpack"
-      },
-      {
-        "id": "16",
-        "title": "TrailLite Daypack",
-        "description": "Built for comfort and efficiency, this lightweight and durable backpack offers a spacious main compartment, multiple pockets, and organization-friendly features all in one sleek package.",
-        "url": "/products/traillite-daypack"
-      }
-    ],
-    "Hiking Clothing": [
-      {
-        "id": "4",
-        "title": "Summit Breeze Jacket",
-        "description": "This lightweight jacket is your perfect companion for outdoor adventures. Sporting a trail-ready, windproof design and a water-resistant fabric, it's ready to withstand any weather.",
-        "url": "/products/summit-breeze-jacket"
-      },
-      {
-        "id": "5",
-        "title": "TrailBlaze Hiking Pants",
-        "description": "Crafted from high-quality nylon fabric, these dapper troopers are lightweight and fast-drying, with a water-resistant armor that laughs off light rain. Their breathable design whisks away sweat while their articulated knees grant you the flexibility of a mountain goat.",
-        "url": "/products/trailblaze-hiking-pants"
-      },
-      {
-        "id": "6",
-        "title": "RainGuard Hiking Jacket",
-        "description": "The ultimate solution for weatherproof comfort during your outdoor undertakings! Designed with waterproof, breathable fabric, this jacket promises an outdoor experience that's as dry as it is comfortable.",
-        "url": "/products/rainguard-hiking-jacket"
-      }
-    ]
-  }
-}
+In the conversation with the user, your goal is to retrieve the required fields for the function find_products and respond with the most appropriate product based on the user needs.
 ```
 
 Then we can create a function to search through the products available on Contoso catalog and return a product similiar to the user requirements.
@@ -210,21 +145,25 @@ Then we can create a function to search through the products available on Contos
 ```
 {
   "name": "find_products",
-  "description": "Finds products based on a user query. This function uses the Azure Cognitive Search API to find products in the search index based on the provided query. The response includes the most relevant products from the index.",
+  "description": "Finds products based on a user needs.",
   "parameters": {
     "type": "object",
     "properties": {
-      "query": {
-        "type": "string",
-        "description": "An optimal search query to find products in the search index using the Azure Cognitive Search API"
-      },
       "category": {
         "type": "string",
-        "description": "The category of the products to search for, e.g. 'electronics', 'books', etc."
+        "description": "an item category such as a jacket, tent or boots"
+      },
+      "outdoor": {
+        "type": "string",
+        "description": "outdoor category for the item e.g. running, hiking, camping."
+      },
+      "cost": {
+        "type": "integer",
+        "description": "maximum cost to be paid by an individual e.g. 200, 20."
       }
     },
     "required": [
-      "query"
+      "category, outdoor, cost"
     ]
   }
 }
