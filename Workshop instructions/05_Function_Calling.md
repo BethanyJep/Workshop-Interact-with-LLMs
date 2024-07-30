@@ -29,9 +29,6 @@ First update the Prompt Instructions.
 ```text title="Prompt Instructions"
 You are an AI assistant that helps people find hotels. 
 In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
- 
-You are an AI assistant that helps people find hotels. 
-In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
 ```
 
 ### Add your Function to your Tools
@@ -112,6 +109,7 @@ Create a new function referencing the local tourist attractions in the location:
   "description": "Determine activities a tourist can take part in",
   "parameters": {
     "type": "object",
+    "properties":{
       "location": {
         "type": "string",
         "description": "location the tourist will be in e.g. Amsterdam, Berlin."
@@ -124,6 +122,7 @@ Create a new function referencing the local tourist attractions in the location:
     "required": [
       "location", "activity"
     ]
+  }
 }
 ```
 
