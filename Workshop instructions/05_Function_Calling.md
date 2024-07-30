@@ -138,7 +138,7 @@ You are an AI assistant that helps people find products in the Contoso Outdoor C
 
 Then we can create a function with the parameters category, outdoor and cost.
 
-```
+``` json title="function"
 {
   "name": "find_products",
   "description": "Finds products based on a user needs.",
