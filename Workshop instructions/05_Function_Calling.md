@@ -30,7 +30,6 @@ First update the Prompt Instructions.
 You are an AI assistant that helps people find hotels. 
 In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
  
-Below is a list of hotels you can reference from:
 You are an AI assistant that helps people find hotels. 
 In the conversation with the user, your goal is to retrieve the required fields for the function search_hotels.
 ```
@@ -43,7 +42,7 @@ A function has three main parameters: name, description, and parameters.
 - Description: The model is to determine when and how to call the function so it's important to give a meaningful description of what the function does.
 - Parameters: is a JSON schema object that describes the parameters that the function accepts.
 
-Below is an example of a sample function:
+Below is an example of a sample function with the parameters location, price and features:
 
 ```json title="function"
 {
@@ -123,24 +122,22 @@ Create a new function referencing the local tourist attractions in the location:
       }
     },
     "required": [
-      "location, activity"
+      "location", "activity"
     ]
 }
 ```
 
 ## Bringing it all together
 
-For the Contoso Outdoor Company, we can create a function to search through the database and return a specific product based on the user query.
+For the Contoso Outdoor Company, we can create a function that searches through the catalog based on specific parameter, that is: product category, outdoor activity and cost of the product.
 
 First we will need to update the system instructions with a description and sample catalog for the different products:
 
 ```
-You are an AI assistant that helps people find products based on their searches on the contoso database.
-
-In the conversation with the user, your goal is to retrieve the required fields for the function find_products and respond with the most appropriate product based on the user needs.
+You are an AI assistant that helps people find products in the Contoso Outdoor Company’s database. In the conversation with the user, your goal is to retrieve the required fields for the function find_products.
 ```
 
-Then we can create a function to search through the products available on Contoso catalog and return a product similiar to the user requirements.
+Then we can create a function with the parameters category, outdoor and cost.
 
 ```
 {
@@ -163,7 +160,7 @@ Then we can create a function to search through the products available on Contos
       }
     },
     "required": [
-      "category, outdoor, cost"
+      "category", "outdoor", "cost"
     ]
   }
 }
@@ -172,7 +169,7 @@ Then we can create a function to search through the products available on Contos
 You can test your functions by asking a question to your model:
 
 ```
-I need warm waterproof jacket ​to go on a hike.
+I need warm jacket.
 ```
 
 Congratulations! You have now completed the 4th part of the lab and you learnt how to interact with llms using Function Calling. Click next to wrap up the lab.
